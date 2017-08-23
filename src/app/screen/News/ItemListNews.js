@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import {Image, Text, TouchableOpacity, View, StyleSheet} from "react-native"
 import {DataNews} from "../../model/DataNews";
 import {connect} from "react-redux";
+import {_UpComment, _UpLike} from "../../action/ItemListNewAction";
 
 class ItemListNews extends Component {
 
@@ -36,7 +37,7 @@ class ItemListNews extends Component {
                         <View style={{flexDirection: 'row',}}>
 
                             <TouchableOpacity onPress={() => {
-                                this._UpLike(dataNews.id)
+                                this.props._UpLike(dataNews.id)
                             }}>
                                 <Image
                                     style={styles.ic}
@@ -51,7 +52,7 @@ class ItemListNews extends Component {
                         <View style={{flexDirection: 'row'}}>
 
                             <TouchableOpacity onPress={() => {
-                                this._UpComment(dataNews.id)
+                                this.props._UpComment(dataNews.id)
                             }}>
                                 <Image
                                     style={styles.ic}
@@ -75,13 +76,6 @@ class ItemListNews extends Component {
         )
     }
 
-    _UpLike(id) {
-        this.props.dispatch({type: 'LIKE', id: id})
-    }
-
-    _UpComment(id) {
-        this.props.dispatch({type: 'COMMENT', id: id})
-    }
 }
 
 const styles = StyleSheet.create({
@@ -136,4 +130,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect()(ItemListNews)
+export default connect(null,{_UpLike,_UpComment})(ItemListNews)
